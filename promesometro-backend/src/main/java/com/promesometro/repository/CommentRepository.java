@@ -10,6 +10,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "comments", path="comments")
 public interface CommentRepository extends PagingAndSortingRepository<Comment,Long> {
 
-    @Query("select c from Comment c where c.promise.idPromise=:promiseId")
+    @Query("select c from Comment c where c.promise.idPromise=:promiseId and c.approved = true")
     List<Comment> findAllByPromise(@Param("promiseId")long promiseId);
 }
