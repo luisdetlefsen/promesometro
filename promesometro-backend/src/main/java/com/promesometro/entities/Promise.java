@@ -18,6 +18,8 @@ public class Promise extends BaseEntity {
 
     private String userAgent;
 
+    private Boolean approved;
+
     @ManyToOne
     @RestResource(exported = true)
     private Candidate candidate;
@@ -126,4 +128,11 @@ public class Promise extends BaseEntity {
         return res;
     }
 
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
 }

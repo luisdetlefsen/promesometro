@@ -1,6 +1,7 @@
 package com.promesometro.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="reactionType")
@@ -12,6 +13,9 @@ public class ReactionType extends BaseEntity {
 
     @Column(unique=true)
     private String reactionType;
+
+    @OneToMany
+    private List<Reaction> reactionList;
 
     public long getIdReactionType() {
         return idReactionType;
@@ -31,5 +35,13 @@ public class ReactionType extends BaseEntity {
 
     public long getId(){
         return idReactionType;
+    }
+
+    public List<Reaction> getReactionList() {
+        return reactionList;
+    }
+
+    public void setReactionList(List<Reaction> reactionList) {
+        this.reactionList = reactionList;
     }
 }
