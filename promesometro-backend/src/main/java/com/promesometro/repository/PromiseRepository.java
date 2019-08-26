@@ -1,6 +1,9 @@
 package com.promesometro.repository;
 
 import com.promesometro.entities.Promise;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +17,9 @@ public interface PromiseRepository extends PagingAndSortingRepository<Promise, L
 
     @Query("select p from Promise p where p.candidate.idCandidate = :idCandidate")
     public List<Promise> findAllByCandidate(@Param("idCandidate") Long idCandidate);
+
+
+    @Query("select p from Promise p where p.approved = true")
+    Page<Promise> findAllByApproved(Pageable pageable);
+
 }
