@@ -11,5 +11,5 @@ import java.util.List;
 public interface CommentRepository extends PagingAndSortingRepository<Comment,Long> {
 
     @Query("select c from Comment c where c.promise.idPromise=:promiseId and c.approved = true")
-    List<Comment> findAllByPromise(@Param("promiseId")long promiseId);
+    List<Comment> findAllByPromise(@Param("promiseId")Long promiseId);
 }

@@ -1,6 +1,7 @@
 package com.promesometro.entities;
 
 import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Promise extends BaseEntity {
     @RestResource(exported = true)
     private Party party;
 
-    @OneToMany
+    @OneToMany(mappedBy = "promise")
     @RestResource(exported = false)
     private List<PromiseMediaContent> promiseMediaContentList;
 
@@ -80,13 +81,13 @@ public class Promise extends BaseEntity {
         return idPromise;
     }
 
-    public List<PromiseMediaContent> getPromiseMediaContentList() {
-        return promiseMediaContentList;
-    }
-
-    public void setPromiseMediaContentList(List<PromiseMediaContent> promiseMediaContentList) {
-        this.promiseMediaContentList = promiseMediaContentList;
-    }
+//    public List<PromiseMediaContent> getPromiseMediaContentList() {
+//        return promiseMediaContentList;
+//    }
+//
+//    public void setPromiseMediaContentList(List<PromiseMediaContent> promiseMediaContentList) {
+//        this.promiseMediaContentList = promiseMediaContentList;
+//    }
 
     public Party getParty() {
         return party;
@@ -141,7 +142,7 @@ public class Promise extends BaseEntity {
 
     public Long getApprovedCommentsCount() {
         if (commentList == null)
-            return 9l;
+            return 0l;
         long r = 0;
         for (Comment c : commentList) {
             if (c.getApproved() != null && c.getApproved()) {
@@ -149,5 +150,16 @@ public class Promise extends BaseEntity {
             }
         }
         return r;
+    }
+
+    @Transient
+    public Integer getAttachmentsCount() {
+        if (promiseMediaContentList == null)
+            return 0;
+        Integer res = 0;
+        for (PromiseMediaContent pmc : promiseMediaContentList) { //wtf .size() was not working?
+            res++;
+        }
+        return res;
     }
 }
