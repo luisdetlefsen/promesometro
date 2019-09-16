@@ -18,7 +18,7 @@ public interface PromiseRepository extends PagingAndSortingRepository<Promise, L
     @Query("select p from Promise p where p.candidate.idCandidate = :idCandidate")
     List<Promise> findAllByCandidate(@Param("idCandidate") Long idCandidate);
 
-    @Query("select p from Promise p where p.candidate.idCandidate = :idCandidate")
+    @Query("select p from Promise p where p.candidate.idCandidate = :idCandidate and p.approved = true")
     Page<Promise> findAllByCandidatePage(@Param("idCandidate") Long idCandidate, Pageable pageable);
 
     @Query("select p from Promise p where p.approved = true")
